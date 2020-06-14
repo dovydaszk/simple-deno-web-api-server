@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css"  />
+  <title>Rick and Morty Home Page</title>
+</head>
+<body>
+  <div class="container">
+
+    <!-- <div class="card-test">
+      <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="" aria-role="hide">
+      <div class="container-test">
+        <h3><b>Rick Sanchez</b></h3> 
+        <p><span class="category">Status:</span> Alive</p>
+        <p>Species - Human</p>
+        <p>Gender - Male</p>
+        <p>Origin - Earth (C-137)</p>
+        <p>Location - Earth (Replacement Dimension)</p>
+      </div>
+    </div> -->
+  
+    <h1>An example page served by Deno using ABC</h1>
+  
+    <div class="cards"></div>
+  </div>
+
+  <script>
+    let template = ''
+    fetch('http://localhost:3000/characters')
+      .then(res => res.json())
+      .then(data => data.results.map(character => {
+        const { name, status, species, gender, origin, location, image } = character
+        template += `
+          <div class="card-test">
+            <h3><b>${name}</b></h3> 
+            <div class="card-body">
+              <img src="${image}" alt="" aria-role="hide">
+              <div class="container-test">
+                <p><span class="category">Status:</span> ${status}</p>
+                <p><span class="category">Species:</span> ${species}</p>
+                <p><span class="category">Gender:</span> ${gender}</p>
+                <p><span class="category block">Origin:</span> ${origin.name}</p>
+                <p><span class="category block">Location:</span> ${location.name}</p>
+              </div>
+            </div>
+          </div>
+        `
+      }))
+      .then(async () => {
+        console.log(template)
+        document.querySelector('.cards').innerHTML = await template
+      })
+  </script>
+</body>
+</html>
