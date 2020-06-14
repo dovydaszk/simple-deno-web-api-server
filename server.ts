@@ -14,3 +14,4 @@ app
   .get('/characters/:id', getCharacter)
 
 app.start({ port: 3000 })
+console.log('API is running on http://localhost:3000')
